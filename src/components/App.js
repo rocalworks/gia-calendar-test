@@ -5,7 +5,7 @@ import { DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import { Button } from 'react-bootstrap';
 
-let server_url = "http://localhost/calendar-api/data/";
+let server_url = "http://api.rocalworks.space/calendar/data";
 
 export default class App extends Component{
     constructor(props) {
@@ -20,7 +20,7 @@ export default class App extends Component{
     }
 
     componentDidMount() {
-        this.getCalendar();
+        //this.getCalendar();
     }
 
     isDayBlocked = (day) => {
@@ -46,10 +46,10 @@ export default class App extends Component{
 
     getCalendar() {
         let params = {
-            method: 'GET'
+            method: 'get'
         };
 
-        fetch(server_url + '/load-calendars', params)
+        fetch(server_url + '/load-calendars/', params)
             .then( response => { return response.text() })
             .then(  data => { console.log(data) });
     }
@@ -59,11 +59,11 @@ export default class App extends Component{
 
         let formData = new FormData(this.bookingForm);
         let params = {
-            method: 'POST',
+            method: 'post',
             body: formData
         };
 
-        fetch(server_url + '/create-event', params)
+        fetch(server_url + '/create-event/', params)
             .then( response => { return response.text() })
             .then(  data => { console.log(data) });
     }
